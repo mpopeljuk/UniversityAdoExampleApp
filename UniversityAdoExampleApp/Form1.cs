@@ -22,6 +22,7 @@ namespace UniversityAdoExampleApp
 
             da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnection"].ConnectionString);
             dataGridView1.DataSource = da.GetTable("Groups");
+            //dfgdfgdfgdfg
         }
     }
 }

@@ -77,5 +77,25 @@ namespace UniversityAdoExampleApp.Properties {
                 return ResourceManager.GetString("M_CELLS_MUST_BE_NOT_EMPTY", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deleting records.
+        /// </summary>
+        internal static string M_DELETE_CONFIRM_HEADER {
+            get {
+                return ResourceManager.GetString("M_DELETE_CONFIRM_HEADER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This action will delete ALL related records in other tables.
+        ///
+        ///Are you shure, you want to procced?.
+        /// </summary>
+        internal static string M_DELETE_CONFIRM_TEXT {
+            get {
+                return ResourceManager.GetString("M_DELETE_CONFIRM_TEXT", resourceCulture);
+            }
+        }
     }
 }

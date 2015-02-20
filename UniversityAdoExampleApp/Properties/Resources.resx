@@ -123,4 +123,12 @@
   <data name="M_CELLS_MUST_BE_NOT_EMPTY" xml:space="preserve">
     <value>Cells cannot be empty while adding or updating data.</value>
   </data>
+  <data name="M_DELETE_CONFIRM_HEADER" xml:space="preserve">
+    <value>Deleting records</value>
+  </data>
+  <data name="M_DELETE_CONFIRM_TEXT" xml:space="preserve">
+    <value>This action will delete ALL related records in other tables.
+
+Are you shure, you want to procced?</value>
+  </data>
 </root>

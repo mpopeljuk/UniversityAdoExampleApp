@@ -57,7 +57,18 @@ namespace UniversityAdoExampleApp
 
         private void deleteSelectedButton_Click(object sender, EventArgs e)
         {
+            DialogResult result = MessageBox.Show(Properties.Resources.M_DELETE_CONFIRM_TEXT,
+                        Properties.Resources.M_DELETE_CONFIRM_HEADER,
+                        MessageBoxButtons.OKCancel);
 
+            if (result == DialogResult.OK)
+            {
+                int affRows = fh.deleteRow(tableComboBox.Text,
+                        int.Parse(showTableGrid.CurrentRow.Cells[0].Value.ToString()));
+                showTable();
+                MessageBox.Show( 
+                    String.Format(Properties.Resources.M_AFFECTED_ROWS, affRows) );
+            }
         }
 
         private void changeSelectedButton_Click(object sender, EventArgs e)
@@ -136,6 +147,7 @@ namespace UniversityAdoExampleApp
 
         /// <summary>
         /// Shows a table, with some pre-work.
+        /// Table name is set from comboBox.
         /// </summary>
         private void showTable()
         {

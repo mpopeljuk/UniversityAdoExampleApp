@@ -155,7 +155,7 @@ namespace DAL
 
         public int DeleteGroupToSubj(int rowId)
         {
-            var deleteGtS = "DELETE FROM Subjects WHERE Id = @ROW_ID";
+            var deleteGtS = "DELETE FROM GroupToSubject WHERE Id = @ROW_ID";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {

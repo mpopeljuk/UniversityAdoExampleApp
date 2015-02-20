@@ -123,6 +123,12 @@ namespace UniversityAdoExampleApp
             return result;
         }
 
+        /// <summary>
+        /// Adding all rows from workingGrid to database.
+        /// </summary>
+        /// <param name="tableName">Table, where rows will be added.</param>
+        /// <param name="grid">Grid - source of rows.</param>
+        /// <returns>Number of affected rows.</returns>
         public int addRows(string tableName, DataGridView grid)
         {
             int affectedRows = 0;
@@ -161,6 +167,43 @@ namespace UniversityAdoExampleApp
                     break;
             }
             return affectedRows;
+        }
+
+        /// <summary>
+        /// todos
+        /// </summary>
+        /// <returns>Number of affected rows.</returns>
+        public int updateRows() 
+        {
+            return 1;
+        }
+
+        /// <summary>
+        /// Delete row from table.
+        /// </summary>
+        /// <param name="tableName">Table, where row will be deleted.</param>
+        /// <param name="rId">Id of row you want to delete</param>
+        /// <returns></returns>
+        public int deleteRow(string tableName, int rId)
+        {
+            switch (tableName)
+            {
+                case "Groups":
+                    return da.DeleteGroupRecord(rId);
+                    break;
+                case "Students":
+                    return da.DeleteStudentRecord(rId);
+                    break;
+                case "Subjects":
+                    return da.DeleteSubjectRecord(rId);
+                    break;
+                case "GroupToSubject":
+                    return da.DeleteGroupToSubj(rId);
+                    break;
+                default:
+                    break;
+            }
+            return -1;
         }
     }
 }

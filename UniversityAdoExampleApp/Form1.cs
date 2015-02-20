@@ -84,7 +84,10 @@ namespace UniversityAdoExampleApp
         {
             if (fh.isValidDataEntered(workingGrid))
             {
-                
+                int result = fh.updateRows(tableComboBox.Text, workingGrid);
+                showTable();
+                MessageBox.Show(
+                    String.Format(Properties.Resources.M_AFFECTED_ROWS, result));
             }
             else
             {

@@ -172,7 +172,7 @@ namespace DAL
         public int UpdateGroupRecord(int groupId, string name)
         {
             var updateGroup = "UPDATE Groups " +
-                        "SET Name = @NAME" +
+                        "SET Name = @NAME " +
                         "WHERE Id = @GROUP_ID";
 
             using (SqlConnection conn = new SqlConnection(connString))
@@ -193,7 +193,7 @@ namespace DAL
         {
             var updateStudent = "UPDATE Students " +
                        "SET FirstName = @FIRST_NAME, LastName = @LAST_NAME, " +
-                       "Age = @AGE, groupId = @GROUP_ID" +
+                       "Age = @AGE, groupId = @GROUP_ID " +
                        "WHERE Id = @STUD_ID";
 
             using (SqlConnection conn = new SqlConnection(connString))
@@ -211,10 +211,10 @@ namespace DAL
             }
         }
 
-        public int UpdateSubjectRecord(int subjId)
+        public int UpdateSubjectRecord(int subjId, string name)
         {
             var updateSubject = "UPDATE Subjects " +
-                       "SET Name = @NAME" +
+                       "SET Name = @NAME " +
                        "WHERE Id = @SUBJ_ID";
 
             using (SqlConnection conn = new SqlConnection(connString))
@@ -223,7 +223,7 @@ namespace DAL
 
                 var sqlCommand = new SqlCommand(updateSubject, conn);
 
-                sqlCommand.Parameters.Add("@NAME", SqlDbType.NVarChar).Value = subjId;
+                sqlCommand.Parameters.Add("@NAME", SqlDbType.NVarChar).Value = name;
                 
                 return sqlCommand.ExecuteNonQuery();
             }

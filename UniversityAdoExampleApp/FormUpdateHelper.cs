@@ -170,15 +170,6 @@ namespace UniversityAdoExampleApp
         }
 
         /// <summary>
-        /// todos
-        /// </summary>
-        /// <returns>Number of affected rows.</returns>
-        public int updateRows() 
-        {
-            return 1;
-        }
-
-        /// <summary>
         /// Delete row from table.
         /// </summary>
         /// <param name="tableName">Table, where row will be deleted.</param>
@@ -205,5 +196,48 @@ namespace UniversityAdoExampleApp
             }
             return -1;
         }
+        
+        /// <summary>
+        /// TODOs
+        /// </summary>
+        /// <returns>Number of affected rows.</returns>
+        public int updateRows(string tableName, DataGridView grid) 
+        {
+            int affectedRows = 0;
+            switch (tableName)
+            {
+                case "Groups":
+                    for (int i = 0; i < grid.RowCount - 1; i++)
+                    {
+                        affectedRows += da.UpdateGroupRecord(
+                                int.Parse(grid.Rows[i].Cells[0].Value.ToString()),
+                                grid.Rows[i].Cells[1].Value.ToString());
+                    }
+                    break;
+                case "Students":
+                    for (int i = 0; i < grid.RowCount - 1; i++)
+                    {
+                        affectedRows += da.UpdateStudentRecord(
+                                int.Parse(grid.Rows[i].Cells[0].Value.ToString()),
+                                grid.Rows[i].Cells[1].Value.ToString(),
+                                grid.Rows[i].Cells[2].Value.ToString(),
+                                int.Parse(grid.Rows[i].Cells[3].Value.ToString()),
+                                GetIdFromString(grid.Rows[i].Cells[4].Value.ToString()));
+                    }
+                    break;
+                case "Subjects":
+                    for (int i = 0; i < grid.RowCount - 1; i++)
+                    {
+                        affectedRows += da.UpdateSubjectRecord(
+                                int.Parse(grid.Rows[i].Cells[0].Value.ToString()),
+                                grid.Rows[i].Cells[1].Value.ToString());
+                    }
+                    break;
+                default:
+                    break;
+            }
+            return affectedRows;
+        }
+
     }
 }

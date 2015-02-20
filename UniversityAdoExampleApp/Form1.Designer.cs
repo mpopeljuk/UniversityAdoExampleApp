@@ -30,7 +30,7 @@
         {
             this.showTableGrid = new System.Windows.Forms.DataGridView();
             this.addRowButton = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
+            this.saveChangeButton = new System.Windows.Forms.Button();
             this.changeSelectedButton = new System.Windows.Forms.Button();
             this.deleteSelectedButton = new System.Windows.Forms.Button();
             this.tableComboBox = new System.Windows.Forms.ComboBox();
@@ -73,17 +73,18 @@
             this.addRowButton.UseVisualStyleBackColor = false;
             this.addRowButton.Click += new System.EventHandler(this.addRowButton_Click);
             // 
-            // button1
+            // saveChangeButton
             // 
-            this.button1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Location = new System.Drawing.Point(296, 527);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(126, 23);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Save Changes";
-            this.button1.UseVisualStyleBackColor = false;
+            this.saveChangeButton.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.saveChangeButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.saveChangeButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.saveChangeButton.Location = new System.Drawing.Point(296, 527);
+            this.saveChangeButton.Name = "saveChangeButton";
+            this.saveChangeButton.Size = new System.Drawing.Size(126, 23);
+            this.saveChangeButton.TabIndex = 2;
+            this.saveChangeButton.Text = "Save Changes";
+            this.saveChangeButton.UseVisualStyleBackColor = false;
+            this.saveChangeButton.Click += new System.EventHandler(this.saveChangesButton_Click);
             // 
             // changeSelectedButton
             // 
@@ -96,6 +97,7 @@
             this.changeSelectedButton.TabIndex = 3;
             this.changeSelectedButton.Text = "Change Selected";
             this.changeSelectedButton.UseVisualStyleBackColor = false;
+            this.changeSelectedButton.Click += new System.EventHandler(this.changeSelectedButton_Click);
             // 
             // deleteSelectedButton
             // 
@@ -166,6 +168,7 @@
             this.subjectComboBox.Name = "subjectComboBox";
             this.subjectComboBox.Size = new System.Drawing.Size(152, 21);
             this.subjectComboBox.TabIndex = 13;
+            this.subjectComboBox.SelectedIndexChanged += new System.EventHandler(this.subjectComboBox_SelectedIndexChanged);
             // 
             // label1
             // 
@@ -185,6 +188,7 @@
             this.groupComboBox.Name = "groupComboBox";
             this.groupComboBox.Size = new System.Drawing.Size(176, 21);
             this.groupComboBox.TabIndex = 11;
+            this.groupComboBox.SelectedIndexChanged += new System.EventHandler(this.groupComboBox_SelectedIndexChanged);
             // 
             // showIdCheckBox
             // 
@@ -208,7 +212,7 @@
             this.Controls.Add(this.tableComboBox);
             this.Controls.Add(this.deleteSelectedButton);
             this.Controls.Add(this.changeSelectedButton);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.saveChangeButton);
             this.Controls.Add(this.addRowButton);
             this.Controls.Add(this.showTableGrid);
             this.MinimumSize = new System.Drawing.Size(600, 600);
@@ -229,7 +233,7 @@
 
         private System.Windows.Forms.DataGridView showTableGrid;
         private System.Windows.Forms.Button addRowButton;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button saveChangeButton;
         private System.Windows.Forms.Button changeSelectedButton;
         private System.Windows.Forms.Button deleteSelectedButton;
         private System.Windows.Forms.ComboBox tableComboBox;

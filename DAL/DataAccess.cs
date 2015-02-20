@@ -245,5 +245,72 @@ namespace DAL
             }
             return dt;
         }
+
+        public DataTable GetSubjectsForGroup(int groupId)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT gts.Id, s.Name " +
+                    "FROM Groups g " +
+                    "JOIN GroupToSubject gts ON g.Id = gts.GroupId " +
+                    "JOIN Subjects s ON gts.SubjectId = s.Id " +
+                    "WHERE g.Id = @ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                var sqlCommand = new SqlCommand(query, conn);
+
+                conn.Open();
+
+                sqlCommand.Parameters.Add("@ID", SqlDbType.Int).Value = groupId;
+
+                SqlDataReader dr = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                dt.Load(dr);
+            }
+            return dt;
+        }
+
+        public DataTable GetGroupsForSubject(int subjId)
+        {
+            DataTable dt = new DataTable();
+            string query = "SELECT gts.Id, g.Name " +
+                    "FROM Groups g " +
+                    "JOIN GroupToSubject gts ON g.Id = gts.GroupId " +
+                    "JOIN Subjects s ON gts.SubjectId = s.Id " +
+                    "WHERE s.Id = @ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                var sqlCommand = new SqlCommand(query, conn);
+
+                conn.Open();
+
+                sqlCommand.Parameters.Add("@ID", SqlDbType.Int).Value = subjId;
+
+                SqlDataReader dr = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                dt.Load(dr);
+            }
+            return dt;
+        }
+
+        /*public DataTable GetStudents()
+        {
+            string query = string.Format("SELECT s.FirstName, s.LastName, s.Age, g.Name " +
+                    "FROM [Students] s " +
+                    "JOIN Groups g ON s.GroupId = g.Id");
+            DataTable dt = new DataTable();
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                var sqlCommand = new SqlCommand(query, conn);
+
+                conn.Open();
+                SqlDataReader dr = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                dt.Load(dr);
+            }
+            return dt;
+        }*/
     }
 }

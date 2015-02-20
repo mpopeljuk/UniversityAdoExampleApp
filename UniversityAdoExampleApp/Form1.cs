@@ -21,7 +21,71 @@ namespace UniversityAdoExampleApp
             InitializeComponent();
 
             da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnection"].ConnectionString);
-            dataGridView1.DataSource = da.GetTable("Groups");
+            showTableGrid.DataSource = da.GetTable("Groups");
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            showTableGrid.Columns[0].Visible = false;
+            adjustWorkTable();
+            workingGrid.Columns[0].Visible = false;
+        }
+
+        private void tableComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            groupToSubjectPanel.Visible = false;
+            showTableGrid.DataSource = da.GetTable(tableComboBox.Text);
+
+            if (tableComboBox.Text == "GroupToSubject")
+            {
+                groupToSubjectPanel.Visible = true;
+            }
+            adjustWorkTable();
+        }
+
+        private void addRowButton_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void deleteSelectedButton_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void showIdCheckBox_CheckedChanged(object sender, EventArgs e)
+        {
+            showTableGrid.Columns[0].Visible = showIdCheckBox.Checked;
+            workingGrid.Columns[0].Visible = showIdCheckBox.Checked;
+        }
+
+        /// <summary>
+        /// Adjusts workingDataGridView to some template.
+        /// Template depends on current table.
+        /// </summary>
+        private void adjustWorkTable()
+        {
+            workingGrid.Columns.Clear();
+
+            workingGrid.ColumnCount = showTableGrid.ColumnCount;
+            FormUpdateHelper fh = new FormUpdateHelper(da);
+
+            switch (tableComboBox.Text)
+            {
+                case "Students":
+                    workingGrid.Columns.Add(fh.getRelationComboBox("Groups"));
+                    break;
+
+                case "GroupToSubject":
+                    workingGrid.ColumnCount = 1;
+                    workingGrid.Columns.Add(fh.getRelationComboBox("Groups"));
+                    workingGrid.Columns.Add(fh.getRelationComboBox("Subjects"));
+                    break;
+
+                default:
+                    
+                    break;
+            }
+            workingGrid.Columns[0].Visible = showIdCheckBox.Checked;
         }
     }
 }

@@ -229,6 +229,21 @@ namespace DAL
             }
         }
         
+        public DataTable GetIdNameVals(string tableName)
+        {
+            string query = string.Format("SELECT Id, Name FROM [{0}]", tableName);
+            DataTable dt = new DataTable();
 
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                var sqlCommand = new SqlCommand(query, conn);
+
+                conn.Open();
+                SqlDataReader dr = sqlCommand.ExecuteReader(CommandBehavior.CloseConnection);
+
+                dt.Load(dr);
+            }
+            return dt;
+        }
     }
 }

@@ -56,17 +56,35 @@ namespace DAL
         public int AddStudent(string firstName, string lastName, int age, int groupId)
         {
             var insertStudent = "INSERT INTO Students (FirstName, LastName, Age, GroupId) VALUES (@FIRST_NAME, @LAST_NAME, @AGE, @GROUP_ID)";
-            var fnPar = new SqlParameter("@FIRST_NAME", SqlDbType.NVarChar);
-            fnPar.Value = firstName;
+            
+            SqlParameter[] sqlParams = new SqlParameter[4];
+            sqlParams[0] = new SqlParameter
+            {
+                ParameterName = "@FIRST_NAME",
+                Value = firstName,
+                SqlDbType = SqlDbType.NVarChar
+            };
 
-            var lnPar = new SqlParameter("@FIRST_NAME", SqlDbType.NVarChar);
-            lnPar.Value = lastName;
+            sqlParams[1] = new SqlParameter
+             {
+                ParameterName = "@LAST_NAME",
+                Value = lastName,
+                SqlDbType = SqlDbType.NVarChar
+            };
 
-            var agePar = new SqlParameter("@AGE", SqlDbType.Int);
-            agePar.Value = age;
+            sqlParams[2] = new SqlParameter
+            {
+                ParameterName = "@AGE",
+                Value = age,
+                SqlDbType = SqlDbType.Int
+            };
 
-            var gIdPar = new SqlParameter("@GROUP_ID", SqlDbType.Int);
-            gIdPar.Value = groupId;
+            sqlParams[3] = new SqlParameter
+            {
+                ParameterName = "@GROUP_ID",
+                Value = groupId,
+                SqlDbType = SqlDbType.Int
+            };
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -74,10 +92,7 @@ namespace DAL
 
                 var sqlCommand = new SqlCommand(insertStudent, conn);
 
-                sqlCommand.Parameters.Add(fnPar);
-                sqlCommand.Parameters.Add(lnPar);
-                sqlCommand.Parameters.Add(age);
-                sqlCommand.Parameters.Add(gIdPar);
+                sqlCommand.Parameters.AddRange(sqlParams);
 
                 return sqlCommand.ExecuteNonQuery();
             }

@@ -44,47 +44,17 @@ namespace DAL
 
                 var sqlCommand = new SqlCommand(insertGroup, conn);
 
-                var parameter = new SqlParameter("@GROUP_NAME", SqlDbType.NVarChar);
-                parameter.Value = name;
-
-                sqlCommand.Parameters.Add(parameter);
+                sqlCommand.Parameters.Add("@GROUP_NAME", SqlDbType.NVarChar).Value = name;
 
                 return sqlCommand.ExecuteNonQuery();
             }
         }
 
-        public int AddStudent(string firstName, string lastName, int age, int groupId)
+        public int AddStudent(string firstName, string lastName, 
+                int age, int groupId)
         {
-            var insertStudent = "INSERT INTO Students (FirstName, LastName, Age, GroupId) VALUES (@FIRST_NAME, @LAST_NAME, @AGE, @GROUP_ID)";
-            
-            SqlParameter[] sqlParams = new SqlParameter[4];
-            sqlParams[0] = new SqlParameter
-            {
-                ParameterName = "@FIRST_NAME",
-                Value = firstName,
-                SqlDbType = SqlDbType.NVarChar
-            };
-
-            sqlParams[1] = new SqlParameter
-             {
-                ParameterName = "@LAST_NAME",
-                Value = lastName,
-                SqlDbType = SqlDbType.NVarChar
-            };
-
-            sqlParams[2] = new SqlParameter
-            {
-                ParameterName = "@AGE",
-                Value = age,
-                SqlDbType = SqlDbType.Int
-            };
-
-            sqlParams[3] = new SqlParameter
-            {
-                ParameterName = "@GROUP_ID",
-                Value = groupId,
-                SqlDbType = SqlDbType.Int
-            };
+            var insertStudent = "INSERT INTO Students (FirstName, LastName, Age, GroupId)" +
+                " VALUES (@FIRST_NAME, @LAST_NAME, @AGE, @GROUP_ID)";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
@@ -92,7 +62,10 @@ namespace DAL
 
                 var sqlCommand = new SqlCommand(insertStudent, conn);
 
-                sqlCommand.Parameters.AddRange(sqlParams);
+                sqlCommand.Parameters.Add("@FIRST_NAME", SqlDbType.NVarChar).Value = firstName;
+                sqlCommand.Parameters.Add("@LAST_NAME", SqlDbType.NVarChar).Value = lastName;
+                sqlCommand.Parameters.Add("@AGE", SqlDbType.Int).Value = age;
+                sqlCommand.Parameters.Add("@GROUP_ID", SqlDbType.Int).Value = groupId;
 
                 return sqlCommand.ExecuteNonQuery();
             }
@@ -108,10 +81,7 @@ namespace DAL
 
                 var sqlCommand = new SqlCommand(insertSubj, conn);
 
-                var parameter = new SqlParameter("@SUBJ_NAME", SqlDbType.NVarChar);
-                parameter.Value = name;
-
-                sqlCommand.Parameters.Add(parameter);
+                sqlCommand.Parameters.Add("@SUBJ_NAME", SqlDbType.NVarChar).Value = name;
 
                 return sqlCommand.ExecuteNonQuery();
             }
@@ -127,36 +97,138 @@ namespace DAL
 
                 var sqlCommand = new SqlCommand(insertGtS, conn);
 
-                var grId = new SqlParameter("@GROUP_ID", SqlDbType.Int);
-                grId.Value = groupId;
-
-                var subjId = new SqlParameter("@GROUP_ID", SqlDbType.Int);
-                subjId.Value = groupId;
-
-                sqlCommand.Parameters.Add(grId);
-                sqlCommand.Parameters.Add(subjId);
+                sqlCommand.Parameters.Add("@GROUP_ID", SqlDbType.Int).Value = groupId;
+                sqlCommand.Parameters.Add("@SUBJ_ID", SqlDbType.Int).Value = subjectId;
 
                 return sqlCommand.ExecuteNonQuery();
             }
         }
 
-        /*public int DeleteRow(string tableName, string colName, dynamic colVal)
+        public int DeleteGroupRecord(int groupId)
         {
-            var insertSubj = "INSERT INTO Subjects (Name) VALUES (@SUBJ_NAME)";
+            var deleteGroup = "DELETE FROM Groups WHERE Id = @GROUP_ID";
 
             using (SqlConnection conn = new SqlConnection(connString))
             {
                 conn.Open();
 
-                var sqlCommand = new SqlCommand(insertSubj, conn);
+                var sqlCommand = new SqlCommand(deleteGroup, conn);
 
-                var parameter = new SqlParameter("@SUBJ_NAME", SqlDbType.NVarChar);
-                parameter.Value = name;
-
-                sqlCommand.Parameters.Add(parameter);
+                sqlCommand.Parameters.Add("@GROUP_ID", SqlDbType.Int).Value = groupId;
 
                 return sqlCommand.ExecuteNonQuery();
             }
-        }*/
+        }
+
+        public int DeleteStudentRecord(int studId)
+        {
+            var deleteStud = "DELETE FROM Students WHERE Id = @STUD_ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                var sqlCommand = new SqlCommand(deleteStud, conn);
+
+                sqlCommand.Parameters.Add("@STUD_ID", SqlDbType.Int).Value = studId;
+
+
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public int DeleteSubjectRecord(int subjId)
+        {
+            var deleteSubj = "DELETE FROM Subjects WHERE Id = @SUBJ_ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                var sqlCommand = new SqlCommand(deleteSubj, conn);
+
+                sqlCommand.Parameters.Add("@SUBJ_ID", SqlDbType.Int).Value = subjId;
+
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public int DeleteGroupToSubj(int rowId)
+        {
+            var deleteGtS = "DELETE FROM Subjects WHERE Id = @ROW_ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                var sqlCommand = new SqlCommand(deleteGtS, conn);
+
+                sqlCommand.Parameters.Add("@ROW_ID", SqlDbType.Int).Value = rowId;
+
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public int UpdateGroupRecord(int groupId, string name)
+        {
+            var updateGroup = "UPDATE Groups " +
+                        "SET Name = @NAME" +
+                        "WHERE Id = @GROUP_ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                var sqlCommand = new SqlCommand(updateGroup, conn);
+
+                sqlCommand.Parameters.Add("@GROUP_ID", SqlDbType.Int).Value = groupId;
+                sqlCommand.Parameters.Add("@NAME", SqlDbType.NVarChar).Value = name;
+
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public int UpdateStudentRecord(int studId, string firstName, 
+                string lastName, int age, int groupId)
+        {
+            var updateStudent = "UPDATE Students " +
+                       "SET FirstName = @FIRST_NAME, LastName = @LAST_NAME, " +
+                       "Age = @AGE, groupId = @GROUP_ID" +
+                       "WHERE Id = @STUD_ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                var sqlCommand = new SqlCommand(updateStudent, conn);
+
+                sqlCommand.Parameters.Add("@FIRST_NAME", SqlDbType.NVarChar).Value = firstName;
+                sqlCommand.Parameters.Add("@LAST_NAME", SqlDbType.NVarChar).Value = lastName;
+                sqlCommand.Parameters.Add("@AGE", SqlDbType.Int).Value = age;
+                sqlCommand.Parameters.Add("@GROUP_ID", SqlDbType.Int).Value = groupId;
+
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
+
+        public int UpdateSubjectRecord(int subjId)
+        {
+            var updateSubject = "UPDATE Subjects " +
+                       "SET Name = @NAME" +
+                       "WHERE Id = @SUBJ_ID";
+
+            using (SqlConnection conn = new SqlConnection(connString))
+            {
+                conn.Open();
+
+                var sqlCommand = new SqlCommand(updateSubject, conn);
+
+                sqlCommand.Parameters.Add("@NAME", SqlDbType.NVarChar).Value = subjId;
+                
+                return sqlCommand.ExecuteNonQuery();
+            }
+        }
+        
+
     }
 }

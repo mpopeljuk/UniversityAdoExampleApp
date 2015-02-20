@@ -20,8 +20,10 @@ namespace UniversityAdoExampleApp
         public Form1()
         {
             InitializeComponent();
-
-            da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnection"].ConnectionString);
+            //HOME DB CONNECTON
+            da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnectionHome"].ConnectionString);
+            //SS DB CONNECTON
+            //da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnection"].ConnectionString);
             fh = new FormUpdateHelper(da);
 
             showTableGrid.DataSource = da.GetTable("Groups");

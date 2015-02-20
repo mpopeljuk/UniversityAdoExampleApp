@@ -113,6 +113,21 @@ namespace UniversityAdoExampleApp
                 showTableGrid.DataSource = da.GetSubjectsForGroup(fh.GetIdFromString(groupComboBox.Text));
         }
 
+        //Checking for vaid age data
+        private void workingGrid_CellEndEdit(object sender, DataGridViewCellEventArgs e)
+        {
+            string val = workingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+            if (workingGrid.Columns[e.ColumnIndex].HeaderText == "Age" &&
+                    !String.IsNullOrWhiteSpace( val ))
+            {
+                int temp;
+                if (!int.TryParse(val,  out temp))
+                {
+                    workingGrid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = "";
+                }
+            }
+        }
+        
         /// <summary>
         /// Adjusts workingDataGridView to some template.
         /// Template depends on current table.
@@ -177,6 +192,7 @@ namespace UniversityAdoExampleApp
 
             adjustWorkTable();
         }
+
 
     }
 }

@@ -138,6 +138,7 @@
             this.workingGrid.Name = "workingGrid";
             this.workingGrid.Size = new System.Drawing.Size(560, 150);
             this.workingGrid.TabIndex = 7;
+            this.workingGrid.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.workingGrid_CellEndEdit);
             // 
             // groupToSubjectPanel
             // 
@@ -205,7 +206,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 562);
+            this.ClientSize = new System.Drawing.Size(592, 571);
             this.Controls.Add(this.showIdCheckBox);
             this.Controls.Add(this.groupToSubjectPanel);
             this.Controls.Add(this.workingGrid);

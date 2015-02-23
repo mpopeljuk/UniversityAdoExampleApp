@@ -41,6 +41,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.groupComboBox = new System.Windows.Forms.ComboBox();
             this.showIdCheckBox = new System.Windows.Forms.CheckBox();
+            this.exitButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.showTableGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.workingGrid)).BeginInit();
             this.groupToSubjectPanel.SuspendLayout();
@@ -123,9 +124,9 @@
             "Students",
             "Subjects",
             "GroupToSubject"});
-            this.tableComboBox.Location = new System.Drawing.Point(59, 12);
+            this.tableComboBox.Location = new System.Drawing.Point(157, 12);
             this.tableComboBox.Name = "tableComboBox";
-            this.tableComboBox.Size = new System.Drawing.Size(513, 21);
+            this.tableComboBox.Size = new System.Drawing.Size(413, 21);
             this.tableComboBox.TabIndex = 5;
             this.tableComboBox.SelectedIndexChanged += new System.EventHandler(this.tableComboBox_SelectedIndexChanged);
             // 
@@ -194,7 +195,7 @@
             // showIdCheckBox
             // 
             this.showIdCheckBox.AutoSize = true;
-            this.showIdCheckBox.Location = new System.Drawing.Point(18, 14);
+            this.showIdCheckBox.Location = new System.Drawing.Point(107, 14);
             this.showIdCheckBox.Name = "showIdCheckBox";
             this.showIdCheckBox.Size = new System.Drawing.Size(35, 17);
             this.showIdCheckBox.TabIndex = 9;
@@ -202,11 +203,24 @@
             this.showIdCheckBox.UseVisualStyleBackColor = true;
             this.showIdCheckBox.CheckedChanged += new System.EventHandler(this.showIdCheckBox_CheckedChanged);
             // 
+            // exitButton
+            // 
+            this.exitButton.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.exitButton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.exitButton.Location = new System.Drawing.Point(12, 10);
+            this.exitButton.Name = "exitButton";
+            this.exitButton.Size = new System.Drawing.Size(75, 23);
+            this.exitButton.TabIndex = 10;
+            this.exitButton.Text = "Exit";
+            this.exitButton.UseVisualStyleBackColor = false;
+            this.exitButton.Click += new System.EventHandler(this.exitButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(592, 571);
+            this.Controls.Add(this.exitButton);
             this.Controls.Add(this.showIdCheckBox);
             this.Controls.Add(this.groupToSubjectPanel);
             this.Controls.Add(this.workingGrid);
@@ -245,6 +259,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ComboBox groupComboBox;
         private System.Windows.Forms.CheckBox showIdCheckBox;
+        private System.Windows.Forms.Button exitButton;
     }
 }
 

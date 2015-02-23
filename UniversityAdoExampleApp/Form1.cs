@@ -21,9 +21,9 @@ namespace UniversityAdoExampleApp
         {
             InitializeComponent();
             //HOME DB CONNECTON
-            da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnectionHome"].ConnectionString);
+            //da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnectionHome"].ConnectionString);
             //SS DB CONNECTON
-            //da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnection"].ConnectionString);
+            da = new DataAccess(ConfigurationManager.ConnectionStrings["UniversityConnection"].ConnectionString);
             fh = new FormUpdateHelper(da);
 
             showTableGrid.DataSource = da.GetTable("Groups");
@@ -128,6 +128,11 @@ namespace UniversityAdoExampleApp
             }
         }
         
+        private void exitButton_Click(object sender, EventArgs e)
+        {
+            Application.Exit(); 
+        }
+        
         /// <summary>
         /// Adjusts workingDataGridView to some template.
         /// Template depends on current table.
@@ -192,7 +197,6 @@ namespace UniversityAdoExampleApp
 
             adjustWorkTable();
         }
-
 
     }
 }

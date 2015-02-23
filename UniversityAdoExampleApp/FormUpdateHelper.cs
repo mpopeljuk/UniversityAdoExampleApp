@@ -12,11 +12,17 @@ namespace UniversityAdoExampleApp
     class FormUpdateHelper
     {
         private DataAccess da;
+        public DataAccess DataAccessC
+        {
+            get { return da; }
+            set { this.da = value; }
+        }
 
-        public FormUpdateHelper(DataAccess _da)
+        public FormUpdateHelper(DataAccess _da) 
         {
             da = _da;
         }
+
 
         /// <summary>
         /// Create a DataGridViewComboBoxColumn with items of table.
@@ -181,16 +187,12 @@ namespace UniversityAdoExampleApp
             {
                 case "Groups":
                     return da.DeleteGroupRecord(rId);
-                    break;
                 case "Students":
                     return da.DeleteStudentRecord(rId);
-                    break;
                 case "Subjects":
                     return da.DeleteSubjectRecord(rId);
-                    break;
                 case "GroupToSubject":
                     return da.DeleteGroupToSubj(rId);
-                    break;
                 default:
                     break;
             }

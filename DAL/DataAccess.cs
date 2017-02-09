@@ -16,7 +16,7 @@ namespace DAL
         {
             connString = conn;
         }
-
+		// Method to get table
         public DataTable GetTable(string tableName)
         {
             string query = string.Format("SELECT * FROM [{0}]", tableName);

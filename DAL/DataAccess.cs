@@ -34,7 +34,7 @@ namespace DAL
             return dt;
         }
 
-		// sadfasdf
+		// sadfasdf xxx
         public int AddGroup(string name)
         {
             var insertGroup = "INSERT INTO Groups (Name) VALUES (@GROUP_NAME)";
